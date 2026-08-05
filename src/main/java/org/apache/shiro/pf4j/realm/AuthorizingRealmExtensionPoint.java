@@ -29,7 +29,7 @@ import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.biz.realm.AbstractAuthorizingRealm;
 import org.apache.shiro.biz.realm.AuthorizingRealmListener;
-import org.apache.shiro.biz.utils.StringUtils;
+import org.apache.shiro.biz.utils.StringUtils2;
 import org.apache.shiro.biz.utils.SubjectUtils;
 import org.apache.shiro.pf4j.annotation.AuthzMapping;
 import org.apache.shiro.pf4j.authc.exception.AuthcPluginNotFoundException;
@@ -170,7 +170,7 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 				// 注解信息
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
 				// 判断类型
-				if(mapping != null && StringUtils.equals(mapping.id(), extensionId) 
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
 						&& extension instanceof PrincipalRepositoryExtensionPoint) {
 					authcPoint = (PrincipalRepositoryExtensionPoint) extension;
 					THREAD_LOCAL.set(authcPoint);
