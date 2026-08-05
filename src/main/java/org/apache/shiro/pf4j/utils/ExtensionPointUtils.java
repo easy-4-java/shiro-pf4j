@@ -23,8 +23,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.biz.utils.StringUtils;
-import org.apache.shiro.biz.utils.WebUtils;
+import org.apache.shiro.biz.utils.StringUtils2;
+import org.apache.shiro.web.util.WebUtils;
 import org.apache.shiro.pf4j.annotation.AuthzMapping;
 import org.apache.shiro.pf4j.authc.exception.AuthcPluginNotFoundException;
 import org.apache.shiro.pf4j.authc.exception.AuthcPointNotFoundException;
@@ -65,7 +65,7 @@ public class ExtensionPointUtils {
 				// 注解信息
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
 				// 判断类型
-				if(mapping != null && StringUtils.equals(mapping.id(), extensionId) 
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
 						&& extension instanceof AuthenticatingExtensionPoint) {
 					authcPoint = (AuthenticatingExtensionPoint) extension;
 					AUTHC_THREAD_LOCAL.set(authcPoint);
@@ -98,7 +98,7 @@ public class ExtensionPointUtils {
 				// 注解信息
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
 				// 判断类型
-				if(mapping != null && StringUtils.equals(mapping.id(), extensionId) 
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
 						&& extension instanceof AuthorizationExtensionPoint) {
 					authzPoint = (AuthorizationExtensionPoint) extension;
 					AUTHZ_THREAD_LOCAL.set(authzPoint);
@@ -118,10 +118,10 @@ public class ExtensionPointUtils {
         //从header中获取pluginId
         String pluginId = httpRequest.getHeader(pluginParamName);
         //如果header中不存在pluginId，则从参数中获取pluginId
-        if (StringUtils.isEmpty(pluginId)) {
+        if (StringUtils2.isEmpty(pluginId)) {
             return httpRequest.getParameter(pluginParamName);
         }
-        if (StringUtils.isEmpty(pluginId)) {
+        if (StringUtils2.isEmpty(pluginId)) {
             // 从 cookie 获取 pluginId
             Cookie[] cookies = httpRequest.getCookies();
             if (null == cookies || cookies.length == 0) {
@@ -142,10 +142,10 @@ public class ExtensionPointUtils {
         //从header中获取extensionId
         String extensionId = httpRequest.getHeader(extensionParamName);
         //如果header中不存在extensionId，则从参数中获取extensionId
-        if (StringUtils.isEmpty(extensionId)) {
+        if (StringUtils2.isEmpty(extensionId)) {
             return httpRequest.getParameter(extensionParamName);
         }
-        if (StringUtils.isEmpty(extensionId)) {
+        if (StringUtils2.isEmpty(extensionId)) {
             // 从 cookie 获取 extensionId
             Cookie[] cookies = httpRequest.getCookies();
             if (null == cookies || cookies.length == 0) {
