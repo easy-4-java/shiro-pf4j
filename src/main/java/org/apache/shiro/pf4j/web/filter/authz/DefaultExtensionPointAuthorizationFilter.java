@@ -7,7 +7,7 @@ import org.apache.shiro.pf4j.utils.ExtensionPointUtils;
 
 /**
  * Default ExtensionPoint 授权 (authorization) 过滤器
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class DefaultExtensionPointAuthorizationFilter extends AbstracExtensionPointAuthorizationFilter {
 
