@@ -2,8 +2,6 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-![Java](https://img.shields.io/badge/Java-21-orange) ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
-
 Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实现可插拔的 Shiro 认证与授权。认证、授权与主体仓库行为可由插件提供，并按请求中的插件/扩展标识动态选择。
 
 ## 目录
