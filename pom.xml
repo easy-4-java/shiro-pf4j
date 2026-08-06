@@ -519,7 +519,7 @@
         <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
         <pf4j.version>3.6.0</pf4j.version>
         <servlet-api.version>3.0.1</servlet-api.version>
-        <shiro-biz.version>2.0.x.20260630-SNAPSHOT</shiro-biz.version>
+        <easy4j-shiro-biz.version>2.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
         <!-- Dependency versions -->
         <slf4j.version>2.0.18</slf4j.version>
     </properties>
@@ -561,7 +561,7 @@
             <dependency>
                 <groupId>io.github.easy4j</groupId>
                 <artifactId>shiro-biz</artifactId>
-                <version>${shiro-biz.version}</version>
+                <version>${easy4j-shiro-biz.version}</version>
             </dependency>
             <!-- For Spring Framework -->
             <dependency>
