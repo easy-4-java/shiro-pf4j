@@ -3,12 +3,13 @@ package org.apache.shiro.pf4j.realm;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.pf4j.authc.token.ExtensionPointAuthenticationToken;
 import org.apache.shiro.pf4j.utils.ExtensionPointUtils;
 
 /**
  * Default ExtensionPoint AuthorizingRealm
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class DefaultExtensionPointAuthorizingRealm extends AuthorizingRealmExtensionPoint {
 
@@ -16,7 +17,7 @@ public class DefaultExtensionPointAuthorizingRealm extends AuthorizingRealmExten
     private String pluginParamName = ExtensionPointUtils.PLUGINID_PARAM;
     
 	@Override
-	public Class<?> getAuthenticationTokenClass() {
+	public Class<? extends AuthenticationToken> getAuthenticationTokenClass() {
 		return ExtensionPointAuthenticationToken.class;// 此Realm只支持ExtensionPointAuthenticationToken
 	}
 	

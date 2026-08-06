@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
+ * Copyright (c) 2018, Loong Wan (https://github.com/loong10k).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,7 +29,7 @@ import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.biz.realm.AbstractAuthorizingRealm;
 import org.apache.shiro.biz.realm.AuthorizingRealmListener;
-import org.apache.shiro.biz.utils.StringUtils;
+import org.apache.shiro.biz.utils.StringUtils2;
 import org.apache.shiro.biz.utils.SubjectUtils;
 import org.apache.shiro.pf4j.annotation.AuthzMapping;
 import org.apache.shiro.pf4j.authc.exception.AuthcPluginNotFoundException;
@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
 /**
  * <b>抽象Realm</b> 
  * <p>公共需要做的事：1.记录日志；2.提高更高级api；3.封装内部处理逻辑；4.事件监听；5.基于Pf4j插件，具备扩展能力</p>
- * @author <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("unchecked")
 public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  implements ExtensionPoint{
@@ -62,7 +62,7 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 	/**
 	 * 获取授权信息;
 	 * 
-	 * @author 		：<a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param principals : PrincipalCollection是一个身份集合，因为我们现在就一个Realm，所以直接调用getPrimaryPrincipal得到之前传入的用户名即可；然后根据用户名调用UserService接口获取角色及权限信息。
 	 * @return 授权信息
 	 */
@@ -104,7 +104,7 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 	 * 
 	 *  </pre>
 	 * 
-	 * @author ：<a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param token 认证Token
 	 * @return 授权信息
 	 * @throws AuthenticationException 认证异常
@@ -170,7 +170,7 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 				// 注解信息
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
 				// 判断类型
-				if(mapping != null && StringUtils.equals(mapping.id(), extensionId) 
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
 						&& extension instanceof PrincipalRepositoryExtensionPoint) {
 					authcPoint = (PrincipalRepositoryExtensionPoint) extension;
 					THREAD_LOCAL.set(authcPoint);
