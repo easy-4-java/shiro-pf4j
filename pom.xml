@@ -355,7 +355,8 @@
                 <maven.test.skip>true</maven.test.skip>
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
-            </properties>
+            
+		<spring-framework.version>5.3.39</spring-framework.version></properties>
         </profile>
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
 
@@ -566,7 +567,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>6.1.2</version>
+                <version>${spring-framework.version}</version>
             </dependency>
             <!-- For Lombok -->
             <dependency>
