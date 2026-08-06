@@ -2,6 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+[![Java](https://img.shields.io/badge/Java-21-orange)](https://github.com/easy-4-java/shiro-pf4j) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
+
 Shiro extension with PF4J — pluggable authentication and authorization for Shiro based on [PF4J](https://pf4j.org/) (the plug-in framework). Authentication, authorization and principal-repository behavior can be provided by plug-ins and selected per request via plug-in / extension identifiers.
 
 ## Table of Contents
