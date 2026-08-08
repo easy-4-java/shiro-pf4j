@@ -17,21 +17,49 @@ package org.apache.shiro.pf4j.authc.exception;
 
 import org.apache.shiro.authc.AuthenticationException;
 
+/**
+ * Exception thrown when a required authorization extension point cannot be found within a loaded PF4J plugin.
+ * This typically indicates that the plugin does not contain an {@link org.apache.shiro.pf4j.authz.point.AuthorizationExtensionPoint}
+ * matching the requested extension identifier.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see org.apache.shiro.pf4j.utils.ExtensionPointUtils#getAuthzPoint
+ */
 @SuppressWarnings("serial")
 public class AuthzPointNotFoundException extends AuthenticationException {
 
+	/**
+	 * Constructs a new exception with no detail message or cause.
+	 */
 	public AuthzPointNotFoundException() {
 		super();
 	}
 
+	/**
+	 * Constructs a new exception with the specified detail message and cause.
+	 *
+	 * @param message the detail message
+	 * @param cause   the underlying cause
+	 */
 	public AuthzPointNotFoundException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Constructs a new exception with the specified detail message.
+	 *
+	 * @param message the detail message
+	 */
 	public AuthzPointNotFoundException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Constructs a new exception with the specified cause.
+	 *
+	 * @param cause the underlying cause
+	 */
 	public AuthzPointNotFoundException(Throwable cause) {
 		super(cause);
 	}

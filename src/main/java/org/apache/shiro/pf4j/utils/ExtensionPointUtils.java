@@ -38,34 +38,69 @@ import org.pf4j.PluginWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Utility class for resolving PF4J extension points from servlet requests.
+ * Provides methods to discover authentication and authorization extension points
+ * by plugin ID and extension ID, with thread-local caching for performance.
+ * <p>Plugin IDs and extension IDs are resolved from request headers, parameters,
+ * or cookies in that priority order.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see AuthenticatingExtensionPoint
+ * @see AuthorizationExtensionPoint
+ */
 public class ExtensionPointUtils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ExtensionPointUtils.class);
+
+	/** Default request parameter name for the plugin identifier. */
 	public static final String PLUGINID_PARAM = "plugin";
+
+	/** Default request parameter name for the extension point identifier. */
 	public static final String EXTENSION_PARAM = "extension";
+
+	/** Thread-local cache for authentication extension points. */
 	public static ThreadLocal<AuthenticatingExtensionPoint> AUTHC_THREAD_LOCAL = new ThreadLocal<AuthenticatingExtensionPoint>();
+
+	/** Thread-local cache for authorization extension points. */
 	public static ThreadLocal<AuthorizationExtensionPoint> AUTHZ_THREAD_LOCAL = new ThreadLocal<AuthorizationExtensionPoint>();
-	
-	public static AuthenticatingExtensionPoint getAuthcPoint(ServletRequest request, ServletResponse response, 
+
+	/**
+	 * Resolves an {@link AuthenticatingExtensionPoint} from the given plugin and extension identifiers.
+	 * Uses a thread-local cache to avoid repeated lookups. If not cached, looks up the plugin via
+	 * the {@link PluginManager}, then searches for an extension annotated with {@link AuthzMapping}
+	 * whose ID matches and that implements {@link AuthenticatingExtensionPoint}.
+	 *
+	 * @param request       the incoming servlet request
+	 * @param response      the outgoing servlet response
+	 * @param pluginManager the PF4J plugin manager
+	 * @param pluginId      the plugin identifier to look up
+	 * @param extensionId   the extension point identifier to match
+	 * @return the resolved authentication extension point
+	 * @throws AuthcPluginNotFoundException if no plugin is found for the given plugin ID
+	 * @throws AuthcPointNotFoundException  if no matching authentication extension point is found
+	 */
+	public static AuthenticatingExtensionPoint getAuthcPoint(ServletRequest request, ServletResponse response,
 			PluginManager pluginManager, String pluginId, String extensionId) throws AuthenticationException {
 		AuthenticatingExtensionPoint authcPoint = AUTHC_THREAD_LOCAL.get();
 		if(authcPoint == null) {
-			// 检查插件是否加载
+			// Check if the plugin is loaded
 			PluginWrapper wrapper = pluginManager.getPlugin(pluginId);
 			if(wrapper == null) {
 				throw new AuthcPluginNotFoundException(String.format("Pf4j plugin not found whith pluginId [%s]", pluginId));
 			}
-			// 记录日志
+			// Log plugin info
 			if(LOG.isDebugEnabled()) {
 				LOG.debug(wrapper.toString());
 			}
-			// 查找插件内的实现对象
+			// Find extension implementations within the plugin
 			List<ExtensionPoint> extensions = pluginManager.getExtensions(ExtensionPoint.class, pluginId);
 			for (ExtensionPoint extension : extensions) {
-				// 注解信息
+				// Check annotation
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
-				// 判断类型
-				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
+				// Match type and ID
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId)
 						&& extension instanceof AuthenticatingExtensionPoint) {
 					authcPoint = (AuthenticatingExtensionPoint) extension;
 					AUTHC_THREAD_LOCAL.set(authcPoint);
@@ -78,27 +113,42 @@ public class ExtensionPointUtils {
 		}
 		return authcPoint;
 	}
-	
-	public static AuthorizationExtensionPoint getAuthzPoint(ServletRequest request, ServletResponse response, 
+
+	/**
+	 * Resolves an {@link AuthorizationExtensionPoint} from the given plugin and extension identifiers.
+	 * Uses a thread-local cache to avoid repeated lookups. If not cached, looks up the plugin via
+	 * the {@link PluginManager}, then searches for an extension annotated with {@link AuthzMapping}
+	 * whose ID matches and that implements {@link AuthorizationExtensionPoint}.
+	 *
+	 * @param request       the incoming servlet request
+	 * @param response      the outgoing servlet response
+	 * @param pluginManager the PF4J plugin manager
+	 * @param pluginId      the plugin identifier to look up
+	 * @param extensionId   the extension point identifier to match
+	 * @return the resolved authorization extension point
+	 * @throws AuthzPluginNotFoundException if no plugin is found for the given plugin ID
+	 * @throws AuthzPointNotFoundException  if no matching authorization extension point is found
+	 */
+	public static AuthorizationExtensionPoint getAuthzPoint(ServletRequest request, ServletResponse response,
 			PluginManager pluginManager, String pluginId, String extensionId) throws AuthenticationException {
 		AuthorizationExtensionPoint authzPoint = AUTHZ_THREAD_LOCAL.get();
 		if(authzPoint == null) {
-			// 检查插件是否加载
+			// Check if the plugin is loaded
 			PluginWrapper wrapper = pluginManager.getPlugin(pluginId);
 			if(wrapper == null) {
 				throw new AuthzPluginNotFoundException(String.format("Pf4j plugin not found whith pluginId [%s]", pluginId));
 			}
-			// 记录日志
+			// Log plugin info
 			if(LOG.isDebugEnabled()) {
 				LOG.debug(wrapper.toString());
 			}
-			// 查找插件内的实现对象
+			// Find extension implementations within the plugin
 			List<ExtensionPoint> extensions = pluginManager.getExtensions(ExtensionPoint.class, pluginId);
 			for (ExtensionPoint extension : extensions) {
-				// 注解信息
+				// Check annotation
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
-				// 判断类型
-				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
+				// Match type and ID
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId)
 						&& extension instanceof AuthorizationExtensionPoint) {
 					authzPoint = (AuthorizationExtensionPoint) extension;
 					AUTHZ_THREAD_LOCAL.set(authzPoint);
@@ -112,17 +162,25 @@ public class ExtensionPointUtils {
 		return authzPoint;
 	}
 
-
+	/**
+	 * Resolves a plugin identifier from the servlet request by checking (in order):
+	 * request header, request parameter, and cookies.
+	 *
+	 * @param request         the incoming servlet request
+	 * @param response        the outgoing servlet response
+	 * @param pluginParamName the name of the header/parameter/cookie to look up
+	 * @return the plugin identifier, or {@code null} if not found
+	 */
 	public static String getPluginId(ServletRequest request, ServletResponse response , String pluginParamName) {
 		HttpServletRequest httpRequest = WebUtils.toHttp(request);
-        //从header中获取pluginId
+        // Try header first
         String pluginId = httpRequest.getHeader(pluginParamName);
-        //如果header中不存在pluginId，则从参数中获取pluginId
+        // Fall back to request parameter
         if (StringUtils2.isEmpty(pluginId)) {
             return httpRequest.getParameter(pluginParamName);
         }
         if (StringUtils2.isEmpty(pluginId)) {
-            // 从 cookie 获取 pluginId
+            // Fall back to cookies
             Cookie[] cookies = httpRequest.getCookies();
             if (null == cookies || cookies.length == 0) {
                 return null;
@@ -137,16 +195,25 @@ public class ExtensionPointUtils {
         return pluginId;
 	}
 
+	/**
+	 * Resolves an extension point identifier from the servlet request by checking (in order):
+	 * request header, request parameter, and cookies.
+	 *
+	 * @param request            the incoming servlet request
+	 * @param response           the outgoing servlet response
+	 * @param extensionParamName the name of the header/parameter/cookie to look up
+	 * @return the extension point identifier, or {@code null} if not found
+	 */
 	public static String getExtensionId(ServletRequest request, ServletResponse response, String extensionParamName) {
 		HttpServletRequest httpRequest = WebUtils.toHttp(request);
-        //从header中获取extensionId
+        // Try header first
         String extensionId = httpRequest.getHeader(extensionParamName);
-        //如果header中不存在extensionId，则从参数中获取extensionId
+        // Fall back to request parameter
         if (StringUtils2.isEmpty(extensionId)) {
             return httpRequest.getParameter(extensionParamName);
         }
         if (StringUtils2.isEmpty(extensionId)) {
-            // 从 cookie 获取 extensionId
+            // Fall back to cookies
             Cookie[] cookies = httpRequest.getCookies();
             if (null == cookies || cookies.length == 0) {
                 return null;
@@ -160,5 +227,5 @@ public class ExtensionPointUtils {
         }
         return extensionId;
 	}
-	
+
 }

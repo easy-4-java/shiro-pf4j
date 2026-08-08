@@ -17,37 +17,39 @@ package org.apache.shiro.pf4j;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.ini.IniSecurityManagerFactory;
 import org.apache.shiro.pf4j.authc.token.ExtensionPointAuthenticationToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
+import org.apache.shiro.mgt.SecurityManager;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Integration test for basic Shiro login/logout using ExtensionPointAuthenticationToken.
+ */
 public class LoginLogoutTest {
 
 	@Test
 	public void testHelloworld() {
-		
-		// 1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-		Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
-		// 2、得到SecurityManager实例 并绑定给SecurityUtils
-		org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+		// 1. Build SecurityManager from shiro.ini
+		IniSecurityManagerFactory factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+		// 2. Get SecurityManager and bind to SecurityUtils
+		SecurityManager securityManager = factory.getInstance();
 		SecurityUtils.setSecurityManager(securityManager);
-		// 3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
+		// 3. Create subject and token
 		Subject subject = SecurityUtils.getSubject();
 		ExtensionPointAuthenticationToken token = new ExtensionPointAuthenticationToken("zhang", "123", false);
 
 		try {
-			// 4、登录，即身份验证
+			// 4. Login
 			subject.login(token);
 		} catch (AuthenticationException e) {
-			// 5、身份验证失败
+			// 5. Authentication failed
 		}
-		
-		Assert.assertEquals(true, subject.isAuthenticated()); // 断言用户已经登录
 
-		// 6、退出
+		Assert.assertEquals(true, subject.isAuthenticated());
+
+		// 6. Logout
 		subject.logout();
 	}
 }
