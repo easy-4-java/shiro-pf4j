@@ -18,5 +18,16 @@ package org.apache.shiro.pf4j.authz.point;
 import org.apache.shiro.biz.authz.principal.ShiroPrincipalRepository;
 import org.pf4j.ExtensionPoint;
 
+/**
+ * Extension point interface for principal repository logic provided by PF4J plugins.
+ * Combines the PF4J {@link ExtensionPoint} marker with {@link ShiroPrincipalRepository}
+ * so that plugin implementations can supply authentication info, roles, and permissions
+ * to the Shiro security framework.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see org.apache.shiro.biz.authz.principal.ShiroPrincipalRepository
+ * @see org.apache.shiro.pf4j.realm.AuthorizingRealmExtensionPoint
+ */
 public interface PrincipalRepositoryExtensionPoint extends ExtensionPoint, ShiroPrincipalRepository  {
 }
