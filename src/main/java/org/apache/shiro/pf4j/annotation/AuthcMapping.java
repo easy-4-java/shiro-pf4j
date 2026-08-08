@@ -22,16 +22,42 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation used to map an authentication extension point implementation to a unique identifier.
+ * When a PF4J plugin provides an {@link org.apache.shiro.pf4j.authc.point.AuthenticatingExtensionPoint},
+ * the implementing class should be annotated with {@code @AuthcMapping} so that the framework can
+ * discover and route authentication requests to the correct extension at runtime.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see org.apache.shiro.pf4j.authc.point.AuthenticatingExtensionPoint
+ * @see org.apache.shiro.pf4j.utils.ExtensionPointUtils#getAuthcPoint
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
 @Inherited
 public @interface AuthcMapping {
-	
+
+	/**
+	 * Returns the unique identifier for this authentication extension point.
+	 *
+	 * @return the non-null extension point identifier
+	 */
 	public String id();
-	
+
+	/**
+	 * Returns a human-readable title for this authentication extension point.
+	 *
+	 * @return the title, or an empty string if not specified
+	 */
 	public String title() default "";
-	
+
+	/**
+	 * Returns a description of this authentication extension point.
+	 *
+	 * @return the description, or an empty string if not specified
+	 */
 	public String desc() default "";
-	
+
 }

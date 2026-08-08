@@ -45,34 +45,51 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <b>抽象Realm</b> 
- * <p>公共需要做的事：1.记录日志；2.提高更高级api；3.封装内部处理逻辑；4.事件监听；5.基于Pf4j插件，具备扩展能力</p>
+ * Abstract Shiro {@link AuthorizingRealm} that is also a PF4J {@link ExtensionPoint}.
+ * Provides plugin-based authentication and authorization by delegating to a
+ * {@link PrincipalRepositoryExtensionPoint} discovered at runtime via the PF4J plugin system.
+ * <p>Key responsibilities:
+ * <ul>
+ *   <li>Resolves the PF4J plugin and extension from the current web request</li>
+ *   <li>Delegates authentication info retrieval to the plugin's principal repository</li>
+ *   <li>Delegates authorization info (roles and permissions) to the plugin's principal repository</li>
+ *   <li>Notifies registered {@link AuthorizingRealmListener}s of success or failure</li>
+ * </ul>
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see org.apache.shiro.pf4j.authz.point.PrincipalRepositoryExtensionPoint
+ * @see org.apache.shiro.pf4j.annotation.AuthzMapping
+ * @see org.apache.shiro.pf4j.realm.DefaultExtensionPointAuthorizingRealm
  */
 @SuppressWarnings("unchecked")
 public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  implements ExtensionPoint{
 
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractAuthorizingRealm.class);
 
-	//realm listeners
+	/** Listeners notified on authentication success or failure. */
 	protected List<AuthorizingRealmListener> realmsListeners;
+
+	/** Thread-local cache for the resolved principal repository extension point. */
 	private ThreadLocal<PrincipalRepositoryExtensionPoint> THREAD_LOCAL = new ThreadLocal<PrincipalRepositoryExtensionPoint>();
+
+	/** The PF4J plugin manager used to discover plugins and extensions. */
 	private PluginManager pluginManager;
-	    
+
 	/**
-	 * 获取授权信息;
-	 * 
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param principals : PrincipalCollection是一个身份集合，因为我们现在就一个Realm，所以直接调用getPrimaryPrincipal得到之前传入的用户名即可；然后根据用户名调用UserService接口获取角色及权限信息。
-	 * @return 授权信息
+	 * Retrieves authorization information (roles and permissions) for the given principals
+	 * by delegating to the resolved {@link PrincipalRepositoryExtensionPoint}.
+	 *
+	 * @param principals the identity principals of the subject being authorized
+	 * @return the authorization info containing roles and permissions, or {@code null} if principals are empty
 	 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    	
+
     	if(principals == null || principals.isEmpty()){
 			return null;
 		}
-    	
+
     	Set<String> permissionsSet, rolesSet = null;
 		if(principals.asList().size() <= 1){
 			permissionsSet = getRepositoryPoint().getPermissions( principals.getPrimaryPrincipal());
@@ -81,7 +98,7 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 			permissionsSet = getRepositoryPoint().getPermissions(principals.asSet());
 			rolesSet = getRepositoryPoint().getRoles(principals.asSet());
 		}
-		
+
     	SimpleAccount account = new SimpleAccount();
     	account.setRoles(rolesSet);
     	account.setStringPermissions(permissionsSet);
@@ -89,32 +106,20 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
     }
 
 	/**
-	 * 
-	 *  获取身份验证相关信息
-	 * 
-	 *  <pre>
-	 * 	首先根据传入的用户名获取User信息；然后如果user为空，那么抛出没找到帐号异常UnknownAccountException；
-	 * 	如果user找到但锁定了抛出锁定异常LockedAccountException；
-	 *  最后生成AuthenticationInfo信息，交给间接父类AuthenticatingRealm使用CredentialsMatcher进行判断密码是否匹配，如果不匹配将抛出密码错误异常IncorrectCredentialsException；
-	 *  
-	 *  另外如果密码重试此处太多将抛出超出重试次数异常ExcessiveAttemptsException；
-	 *  在组装SimpleAuthenticationInfo信息时，需要传入：
-	 *  	身份信息（用户名）、凭据（密文密码）、盐（username+salt），
-	 *  CredentialsMatcher使用盐加密传入的明文密码和此处的密文密码进行匹配。
-	 * 
-	 *  </pre>
-	 * 
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param token 认证Token
-	 * @return 授权信息
-	 * @throws AuthenticationException 认证异常
+	 * Retrieves authentication information by delegating to the resolved
+	 * {@link PrincipalRepositoryExtensionPoint}. Notifies registered
+	 * {@link AuthorizingRealmListener}s of success or failure.
+	 *
+	 * @param token the authentication token submitted by the subject
+	 * @return the authentication info for the subject
+	 * @throws AuthenticationException if authentication fails or no matching principal is found
 	 */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-    	
+
     	LOG.info("Handle authentication token {}.", new Object[] { token });
-    	
-    	
+
+
     	AuthenticationException ex = null;
     	AuthenticationInfo info = null;
     	try {
@@ -122,8 +127,8 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 		} catch (AuthenticationException e) {
 			ex = e;
 		}
-		
-		//调用事件监听器
+
+		// Notify realm listeners
 		if(getRealmsListeners() != null && getRealmsListeners().size() > 0){
 			for (AuthorizingRealmListener realmListener : getRealmsListeners()) {
 				if(ex != null || null == info){
@@ -133,44 +138,55 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 				}
 			}
 		}
-		
+
 		if(ex != null){
 			throw ex;
 		}
-		
+
 		return info;
     }
-	
+
+	/**
+	 * Clears the authorization cache for the current subject.
+	 */
 	public void clearAuthorizationCache(){
 		clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 	}
-	
+
+	/**
+	 * Resolves and returns the {@link PrincipalRepositoryExtensionPoint} from the current web request.
+	 * Uses a thread-local cache to avoid repeated plugin lookups within the same request.
+	 *
+	 * @return the resolved principal repository extension point
+	 * @throws AuthcPluginNotFoundException if the plugin cannot be found by the resolved plugin ID
+	 * @throws AuthcPointNotFoundException  if no matching principal repository extension point is found in the plugin
+	 */
 	protected PrincipalRepositoryExtensionPoint getRepositoryPoint() {
-		
+
 		WebSubject subject = SubjectUtils.getWebSubject();
 		ServletRequest request = subject.getServletRequest();
 		ServletResponse response = subject.getServletResponse();
-		
+
 		PrincipalRepositoryExtensionPoint authcPoint = THREAD_LOCAL.get();
 		if(authcPoint == null) {
 			String pluginId =  this.getPluginId(request, response);
-			// 检查插件是否加载
+			// Check if the plugin is loaded
 			PluginWrapper wrapper = getPluginManager().getPlugin(pluginId);
 			if(wrapper == null) {
 				throw new AuthcPluginNotFoundException(String.format("Pf4j plugin not found whith pluginId [%s]", pluginId));
 			}
-			// 记录日志
+			// Log plugin info
 			if(LOG.isDebugEnabled()) {
 				LOG.debug(wrapper.toString());
 			}
-			// 查找插件内的实现对象
+			// Find extension implementations within the plugin
 			List<ExtensionPoint> extensions = getPluginManager().getExtensions(ExtensionPoint.class, pluginId);
 			String extensionId = this.getExtensionId(request, response);
 			for (ExtensionPoint extension : extensions) {
-				// 注解信息
+				// Check annotation
 				AuthzMapping mapping = extension.getClass().getAnnotation(AuthzMapping.class);
-				// 判断类型
-				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId) 
+				// Match type and ID
+				if(mapping != null && StringUtils2.equals(mapping.id(), extensionId)
 						&& extension instanceof PrincipalRepositoryExtensionPoint) {
 					authcPoint = (PrincipalRepositoryExtensionPoint) extension;
 					THREAD_LOCAL.set(authcPoint);
@@ -184,23 +200,58 @@ public abstract class AuthorizingRealmExtensionPoint extends AuthorizingRealm  i
 		return authcPoint;
 	}
 
+	/**
+	 * Resolves the PF4J plugin identifier from the current servlet request.
+	 *
+	 * @param request  the incoming servlet request
+	 * @param response the outgoing servlet response
+	 * @return the plugin identifier string
+	 */
 	protected abstract String getPluginId(ServletRequest request, ServletResponse response);
+
+	/**
+	 * Resolves the extension point identifier from the current servlet request.
+	 *
+	 * @param request  the incoming servlet request
+	 * @param response the outgoing servlet response
+	 * @return the extension point identifier string
+	 */
 	protected abstract String getExtensionId(ServletRequest request, ServletResponse response);
 
+	/**
+	 * Returns the PF4J plugin manager.
+	 *
+	 * @return the plugin manager instance
+	 */
 	public PluginManager getPluginManager() {
 		return pluginManager;
 	}
 
+	/**
+	 * Sets the PF4J plugin manager.
+	 *
+	 * @param pluginManager the plugin manager instance to use
+	 */
 	public void setPluginManager(PluginManager pluginManager) {
 		this.pluginManager = pluginManager;
 	}
 
+	/**
+	 * Returns the list of realm listeners notified on authentication events.
+	 *
+	 * @return the list of realm listeners, or {@code null} if none are registered
+	 */
 	public List<AuthorizingRealmListener> getRealmsListeners() {
 		return realmsListeners;
 	}
 
+	/**
+	 * Sets the list of realm listeners to be notified on authentication events.
+	 *
+	 * @param realmsListeners the list of realm listeners
+	 */
 	public void setRealmsListeners(List<AuthorizingRealmListener> realmsListeners) {
 		this.realmsListeners = realmsListeners;
 	}
-	
+
 }
