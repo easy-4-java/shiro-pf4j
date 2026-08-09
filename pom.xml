@@ -192,13 +192,12 @@
                     <!-- 单元测试插件：执行测试用例 -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.vertsion}</version>
+                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <skip>false</skip>
                         <skipTests>false</skipTests>
                         <forkMode>once</forkMode>
-                        <argLine>-Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=256m
-							-Dfile.encoding=UTF-8</argLine>
+                        <argLine>-Xmx1024m -Dfile.encoding=UTF-8</argLine>
                         <additionalClasspathElements>
                             <additionalClasspathElement>${basedir}/target/test-classes</additionalClasspathElement>
                         </additionalClasspathElements>
@@ -516,7 +515,7 @@
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-        <maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
+        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
         <pf4j.version>3.6.0</pf4j.version>
