@@ -25,7 +25,7 @@ import org.apache.shiro.pf4j.utils.ExtensionPointUtils;
  * Resolves the plugin ID and extension ID from request headers, parameters, or cookies
  * using {@link ExtensionPointUtils}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AbstractExtensionPointAuthenticatingFilter
  * @see ExtensionPointUtils#getPluginId

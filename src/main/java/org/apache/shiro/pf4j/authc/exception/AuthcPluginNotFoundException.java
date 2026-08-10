@@ -21,7 +21,7 @@ import org.apache.shiro.authc.AuthenticationException;
  * Exception thrown when a required PF4J authentication plugin cannot be found by its plugin identifier.
  * This typically indicates that the plugin has not been loaded or the specified plugin ID is incorrect.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.utils.ExtensionPointUtils#getAuthcPoint
  */

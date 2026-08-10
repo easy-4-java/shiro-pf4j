@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
  *   <li>Notifies registered {@link AuthorizingRealmListener}s of success or failure</li>
  * </ul>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.authz.point.PrincipalRepositoryExtensionPoint
  * @see org.apache.shiro.pf4j.annotation.AuthzMapping

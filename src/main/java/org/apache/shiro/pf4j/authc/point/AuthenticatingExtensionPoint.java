@@ -32,7 +32,7 @@ import org.pf4j.ExtensionPoint;
  * and are used to delegate authentication decisions such as login requests, access control,
  * token creation, and login/logout callbacks to plugin-supplied logic.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.annotation.AuthcMapping
  * @see org.apache.shiro.pf4j.web.filter.authc.AbstractExtensionPointAuthenticatingFilter

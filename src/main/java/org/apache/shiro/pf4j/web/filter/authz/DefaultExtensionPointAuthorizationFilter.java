@@ -11,7 +11,7 @@ import org.apache.shiro.pf4j.utils.ExtensionPointUtils;
  * using {@link ExtensionPointUtils} and delegates authorization to the plugin's
  * authorization extension point.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AbstracExtensionPointAuthorizationFilter
  * @see ExtensionPointUtils#getPluginId

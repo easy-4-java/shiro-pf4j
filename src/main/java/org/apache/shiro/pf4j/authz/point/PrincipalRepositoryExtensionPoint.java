@@ -24,7 +24,7 @@ import org.pf4j.ExtensionPoint;
  * so that plugin implementations can supply authentication info, roles, and permissions
  * to the Shiro security framework.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.biz.authz.principal.ShiroPrincipalRepository
  * @see org.apache.shiro.pf4j.realm.AuthorizingRealmExtensionPoint

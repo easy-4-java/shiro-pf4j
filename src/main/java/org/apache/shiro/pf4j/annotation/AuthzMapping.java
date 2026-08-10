@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * class should be annotated with {@code @AuthzMapping} so that the framework can discover and route
  * authorization requests to the correct extension at runtime.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.authz.point.AuthorizationExtensionPoint
  * @see org.apache.shiro.pf4j.authz.point.PrincipalRepositoryExtensionPoint

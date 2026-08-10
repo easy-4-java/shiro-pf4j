@@ -22,7 +22,7 @@ import org.apache.shiro.authc.AuthenticationException;
  * This typically indicates that the plugin does not contain an {@link org.apache.shiro.pf4j.authc.point.AuthenticatingExtensionPoint}
  * matching the requested extension identifier.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.utils.ExtensionPointUtils#getAuthcPoint
  */

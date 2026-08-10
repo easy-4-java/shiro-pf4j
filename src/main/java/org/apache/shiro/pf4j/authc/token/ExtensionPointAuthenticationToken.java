@@ -22,7 +22,7 @@ import org.apache.shiro.biz.authc.token.DefaultAuthenticationToken;
  * Extends {@link DefaultAuthenticationToken} to carry credentials through the
  * Shiro authentication pipeline when using plugin-provided authentication logic.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.biz.authc.token.DefaultAuthenticationToken
  */

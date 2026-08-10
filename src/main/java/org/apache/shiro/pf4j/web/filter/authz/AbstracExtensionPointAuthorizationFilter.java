@@ -32,7 +32,7 @@ import org.pf4j.PluginManager;
  * {@link AuthorizationFilter} and forwards each lifecycle method (enabled check, access
  * control, login request detection, access denial handling) to the extension point.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AuthorizationExtensionPoint
  * @see ExtensionPointUtils#getAuthzPoint

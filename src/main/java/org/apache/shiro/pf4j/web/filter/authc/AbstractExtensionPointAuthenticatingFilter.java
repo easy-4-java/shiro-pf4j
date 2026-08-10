@@ -35,7 +35,7 @@ import org.pf4j.PluginManager;
  * {@link AbstractAuthenticatingFilter} and forwards each lifecycle method (login detection,
  * access control, token creation, success/failure callbacks, cleanup) to the extension point.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AuthenticatingExtensionPoint
  * @see ExtensionPointUtils#getAuthcPoint

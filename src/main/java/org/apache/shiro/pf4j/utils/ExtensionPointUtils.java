@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * <p>Plugin IDs and extension IDs are resolved from request headers, parameters,
  * or cookies in that priority order.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AuthenticatingExtensionPoint
  * @see AuthorizationExtensionPoint

@@ -14,7 +14,7 @@ import org.pf4j.PluginManager;
  * {@link AuthenticatingExtensionPoint} resolved at runtime. This filter extends Shiro's
  * {@link AbstractLogoutFilter} and forwards the logout operation to the extension point.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AuthenticatingExtensionPoint
  * @see ExtensionPointUtils#getAuthcPoint

@@ -29,7 +29,7 @@ import org.pf4j.ExtensionPoint;
  * and are used to delegate authorization decisions such as access control and login request
  * detection to plugin-supplied logic.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see org.apache.shiro.pf4j.annotation.AuthzMapping
  * @see org.apache.shiro.pf4j.web.filter.authz.AbstracExtensionPointAuthorizationFilter
