@@ -350,13 +350,12 @@
                 <jdk>[1.8,)</jdk>
             </activation>
             <properties>
-                <central-maven-publishing-plugin.version>0.11.0</central-maven-publishing-plugin.version>
+                <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
                 <lombok.version>1.18.46</lombok.version>
                 <maven.test.skip>true</maven.test.skip>
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
             
-        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
 		<spring-framework.version>5.3.39</spring-framework.version></properties>
         </profile>
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
@@ -480,7 +479,7 @@
                         <!-- 发布插件：将制品发布到 Maven Central Portal -->
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${central-maven-publishing-plugin.version}</version>
+                        <version>${maven-central-publishing-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
@@ -524,7 +523,6 @@
         <easy4j-shiro-biz.version>2.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
         <!-- Dependency versions -->
         <slf4j.version>2.0.18</slf4j.version>
-        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
     </properties>
 
     <!-- 依赖版本统一管理（dependencyManagement） -->
