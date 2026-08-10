@@ -347,10 +347,12 @@
                 <jdk>[1.8,)</jdk>
             </activation>
             <properties>
-                <lombok.version>1.18.46</lombok.version>
-                <maven.test.skip>true</maven.test.skip>
-                <additionalparam>-Xdoclint:none</additionalparam>
-                <spring-framework.version>5.3.39</spring-framework.version></properties>
+                    <!-- Dependency versions -->
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <lombok.version>1.18.46</lombok.version>
+                    <maven.test.skip>true</maven.test.skip>
+                    <spring-framework.version>5.3.39</spring-framework.version>
+            </properties>
         </profile>
         
 
@@ -488,36 +490,39 @@
 
     
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <commons-codec.version>1.22.0</commons-codec.version>
-        <commons-lang3.version>3.20.0</commons-lang3.version>
-        <commons-io.version>2.22.0</commons-io.version>
-        <fastjson.version>2.0.62</fastjson.version>
-        <junit.version>4.13.2</junit.version>
-        <junit-jupiter.version>6.1.0</junit-jupiter.version>
-        <java.version>21</java.version>
-        <maven.version>3.0</maven.version>
-        
-        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
-        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
-        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
-        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-        <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
-        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
-        <pf4j.version>3.6.0</pf4j.version>
-        <servlet-api.version>3.0.1</servlet-api.version>
-        <easy4j-shiro-biz.version>3.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
-        
-        <slf4j.version>2.0.18</slf4j.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release><maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version><maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version></properties>
+            <java.version>21</java.version>
+            <maven.compiler.release>${java.version}</maven.compiler.release>
+            <maven.version>3.0</maven.version>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <!-- Dependency versions -->
+            <commons-codec.version>1.22.0</commons-codec.version>
+            <commons-io.version>2.22.0</commons-io.version>
+            <commons-lang3.version>3.20.0</commons-lang3.version>
+            <easy4j-shiro-biz.version>3.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
+            <fastjson.version>2.0.62</fastjson.version>
+            <junit-jupiter.version>6.1.0</junit-jupiter.version>
+            <junit.version>4.13.2</junit.version>
+            <pf4j.version>3.6.0</pf4j.version>
+            <servlet-api.version>3.0.1</servlet-api.version>
+            <slf4j.version>2.0.18</slf4j.version>
+            <!-- Maven Plugin versions -->
+            <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
+            <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+            <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+            <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+            <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+            <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+            <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+            <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+            <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+            <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+            <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+            <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
+            <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
+            <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+            <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+            <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    </properties>
 
     
     <dependencyManagement>
