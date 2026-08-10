@@ -502,6 +502,7 @@
         <junit.version>4.13.2</junit.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <java.version>17</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.version>3.0</maven.version>
         <!-- Maven Plugin versions -->
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
