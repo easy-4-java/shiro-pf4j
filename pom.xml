@@ -524,6 +524,9 @@
         <easy4j-shiro-biz.version>2.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
         <!-- Dependency versions -->
         <slf4j.version>2.0.18</slf4j.version>
+        <lombok.version>1.18.46</lombok.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+        <spring-framework.version>5.3.39</spring-framework.version>
     </properties>
 
     <!-- 依赖版本统一管理（dependencyManagement） -->
