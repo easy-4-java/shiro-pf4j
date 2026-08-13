@@ -26,7 +26,7 @@ Shiro extension with PF4J — pluggable authentication and authorization for Shi
 
 `shiro-pf4j` lets plug-ins extend Shiro's authentication and authorization:
 
-- **Extension points**: `AuthenticatingExtensionPoint`, `AuthorizationExtensionPoint`, `PrincipalRepositoryExtensionPoint` (extends `ShiroPrincipalRepository` from `shiro-biz`) — implemented by plug-ins, discovered through the PF4J `PluginManager`.
+- **Extension points**: `AuthenticatingExtensionPoint`, `AuthorizationExtensionPoint`, `PrincipalRepositoryExtensionPoint` (extends `ShiroPrincipalRepository` from `shiro-extension`) — implemented by plug-ins, discovered through the PF4J `PluginManager`.
 - **Realm**: `AuthorizingRealmExtensionPoint` / `DefaultExtensionPointAuthorizingRealm` dispatch authentication and authorization to the extension point matching the request's plug-in / extension identifiers.
 - **Filters**: `AbstractExtensionPointAuthenticatingFilter` / `DefaultExtensionPointAuthenticatingFilter`, logout filters, and `AbstracExtensionPointAuthorizationFilter` / `DefaultExtensionPointAuthorizationFilter` route each request to the right plug-in extension.
 - **Mapping annotations**: `@AuthcMapping` / `@AuthzMapping` (id, title, desc) mark authentication/authorization extension points.
@@ -69,7 +69,7 @@ Shiro extension with PF4J — pluggable authentication and authorization for Shi
 | JDK | 21+ |
 | Maven | 3.0+ (Maven Wrapper 3.5.0 bundled) |
 | PF4J | 3.6.0 (`org.pf4j:pf4j`) |
-| easy4j dependency | `io.github.easy4j:shiro-biz` (`3.0.x.x.20260630-SNAPSHOT`) |
+| easy4j dependency | `io.github.easy4j:shiro-extension` (`3.0.x.x.20260630-SNAPSHOT`) |
 | Other | spring-core, commons-lang3, javax.servlet-api 4.0.1 |
 
 **Version lines**

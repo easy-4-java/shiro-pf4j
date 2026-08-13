@@ -37,7 +37,7 @@ jobs:
       - name: Install Easy4J snapshot dependencies
         env:
           EASY4J_BRANCH: ${{ github.base_ref || github.ref_name }}
-          EASY4J_DEPENDENCIES: "jwt-issuer shiro-biz"
+          EASY4J_DEPENDENCIES: "jwt-issuer shiro-extension"
         run: |
           set -euo pipefail
           dependency_root="${RUNNER_TEMP}/easy4j-dependencies"

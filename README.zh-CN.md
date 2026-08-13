@@ -26,7 +26,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 
 `shiro-pf4j` 让插件扩展 Shiro 的认证与授权：
 
-- **扩展点**：`AuthenticatingExtensionPoint`、`AuthorizationExtensionPoint`、`PrincipalRepositoryExtensionPoint`（继承 `shiro-biz` 的 `ShiroPrincipalRepository`）——由插件实现，通过 PF4J `PluginManager` 发现。
+- **扩展点**：`AuthenticatingExtensionPoint`、`AuthorizationExtensionPoint`、`PrincipalRepositoryExtensionPoint`（继承 `shiro-extension` 的 `ShiroPrincipalRepository`）——由插件实现，通过 PF4J `PluginManager` 发现。
 - **Realm**：`AuthorizingRealmExtensionPoint` / `DefaultExtensionPointAuthorizingRealm` 根据请求中的插件/扩展标识，将认证与授权分派给匹配的扩展点。
 - **过滤器**：`AbstractExtensionPointAuthenticatingFilter` / `DefaultExtensionPointAuthenticatingFilter`、登出过滤器，以及 `AbstracExtensionPointAuthorizationFilter` / `DefaultExtensionPointAuthorizationFilter`，将每个请求路由到正确的插件扩展。
 - **映射注解**：`@AuthcMapping` / `@AuthzMapping`（id、title、desc）标注认证/授权扩展点。
@@ -69,7 +69,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 | JDK | 21+ |
 | Maven | 3.0+（内置 Maven Wrapper 3.5.0） |
 | PF4J | 3.6.0（`org.pf4j:pf4j`） |
-| easy4j 依赖 | `io.github.easy4j:shiro-biz`（`3.0.x.x.20260630-SNAPSHOT`） |
+| easy4j 依赖 | `io.github.easy4j:shiro-extension`（`3.0.x.x.20260630-SNAPSHOT`） |
 | 其他 | spring-core、commons-lang3、javax.servlet-api 4.0.1 |
 
 **版本线**

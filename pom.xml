@@ -498,7 +498,7 @@
             <commons-codec.version>1.22.0</commons-codec.version>
             <commons-io.version>2.22.0</commons-io.version>
             <commons-lang3.version>3.20.0</commons-lang3.version>
-            <easy4j-shiro-biz.version>3.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
+            <easy4j-shiro-extension.version>3.0.x.20260630-SNAPSHOT</easy4j-shiro-extension.version>
             <fastjson.version>2.0.62</fastjson.version>
             <junit-jupiter.version>6.1.0</junit-jupiter.version>
             <junit.version>4.13.2</junit.version>
@@ -562,8 +562,8 @@
             
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>shiro-biz</artifactId>
-                <version>${easy4j-shiro-biz.version}</version>
+                <artifactId>shiro-extension</artifactId>
+                <version>${easy4j-shiro-extension.version}</version>
             </dependency>
             
             <dependency>
@@ -613,7 +613,7 @@
         
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>shiro-biz</artifactId>
+            <artifactId>shiro-extension</artifactId>
         </dependency>
         
         <dependency>
