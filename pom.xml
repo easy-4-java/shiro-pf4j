@@ -555,7 +555,7 @@
             
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>shiro-extension</artifactId>
+                <artifactId>shiro-extension-core</artifactId>
                 <version>${easy4j-shiro-extension.version}</version>
             </dependency>
             
@@ -606,7 +606,7 @@
         
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>shiro-extension</artifactId>
+            <artifactId>shiro-extension-core</artifactId>
         </dependency>
         
         <dependency>
