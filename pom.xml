@@ -63,8 +63,7 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
-                        <defaultLibBundleDir>lib</defaultLibBundleDir>
-                        
+
                         
                         
                         <encoding>${project.build.sourceEncoding}</encoding>
@@ -172,9 +171,7 @@
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
                     <configuration>
-                        <testFailureIgnore>true</testFailureIgnore>
                         <attach>true</attach>
-                        <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                     <executions>
                         <execution>
@@ -195,7 +192,6 @@
                     <configuration>
                         <skip>false</skip>
                         <skipTests>false</skipTests>
-                        <forkMode>once</forkMode>
                         <argLine>-Xmx1024m   -Dfile.encoding=UTF-8</argLine>
                         <additionalClasspathElements>
                             <additionalClasspathElement>${basedir}/target/test-classes</additionalClasspathElement>
@@ -216,7 +212,6 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                     <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
                         <skipIfEmpty>true</skipIfEmpty>
                         <archive>
                             <manifest>
@@ -234,8 +229,6 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
                     <configuration>
-                        <aggregate>true</aggregate>
-                        <argLine>-Dfile.encoding=UTF-8</argLine>
                         <charset>${project.build.sourceEncoding}</charset>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
