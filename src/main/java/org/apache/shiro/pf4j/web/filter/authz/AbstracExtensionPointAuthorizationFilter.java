@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
+ * Copyright (c) 2018, hiwepy (https://github.com/easy-4-java).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -28,7 +28,7 @@ import org.pf4j.PluginManager;
 
 /**
  * 基于Pf4插件的抽象的授权 (authorization)过滤器
- * @author <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author <a href="https://github.com/easy-4-java">hiwepy</a>
  */
 public abstract class AbstracExtensionPointAuthorizationFilter extends AuthorizationFilter  {
 
