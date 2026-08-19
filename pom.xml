@@ -41,7 +41,7 @@
         <maven.version>3.9.16</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- ═══ Dependency versions（自然排序）═══ -->
+        <!-- Dependency versions -->
         <commons-codec.version>1.22.0</commons-codec.version>
         <commons-io.version>2.22.0</commons-io.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
@@ -55,7 +55,7 @@
         <slf4j.version>2.0.18</slf4j.version>
         <spring-framework.version>5.3.39</spring-framework.version>
 
-        <!-- ═══ Maven Plugin versions（自然排序）═══ -->
+        <!-- Maven Plugin versions -->
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
