@@ -5,8 +5,8 @@
     <artifactId>shiro-pf4j</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
-    <version>2.0.x.20260630-SNAPSHOT</version>
     <description>Shiro Extension Whith Pf4j</description>
+    <version>2.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
     <!-- 开源协议采用 Apache 2.0 协议 -->
     <licenses>
