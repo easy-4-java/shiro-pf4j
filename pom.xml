@@ -70,6 +70,7 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <lombok.version>1.18.46</lombok.version>
         <spring-framework.version>5.3.39</spring-framework.version>
+    
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -414,7 +415,8 @@
                 <spring-framework.version>5.3.39</spring-framework.version>
 
                 <!-- ═══ Maven Plugin versions（自然排序）═══ -->
-            </properties>
+            
+    </properties>
         </profile>
         <profile>
             <id>release</id>
