@@ -40,7 +40,6 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.version>3.9.16</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <!-- Dependency versions -->
         <commons-codec.version>1.22.0</commons-codec.version>
         <commons-io.version>2.22.0</commons-io.version>
@@ -54,7 +53,6 @@
         <servlet-api.version>3.0.1</servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
         <spring-framework.version>5.3.39</spring-framework.version>
-
         <!-- Maven Plugin versions -->
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -71,7 +69,6 @@
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
-    
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -461,18 +458,15 @@
             </activation>
             <properties>
                 <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
-
                 <!-- ═══ Dependency versions（自然排序）═══ -->
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <lombok.version>1.18.46</lombok.version>
                 <maven.test.skip>true</maven.test.skip>
                 <spring-framework.version>5.3.39</spring-framework.version>
-
                 <!-- ═══ Maven Plugin versions（自然排序）═══ -->
                 <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
                 <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
-            
-    </properties>
+            </properties>
         </profile>
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
         <profile>
