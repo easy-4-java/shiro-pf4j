@@ -409,7 +409,6 @@
             <properties>
                 <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
                 <!-- ═══ Dependency versions（自然排序）═══ -->
-                <additionalparam>-Xdoclint:none</additionalparam>
                 <lombok.version>1.18.46</lombok.version>
                 <maven.test.skip>true</maven.test.skip>
                 <spring-framework.version>5.3.39</spring-framework.version>
