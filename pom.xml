@@ -44,7 +44,7 @@
         <commons-codec.version>1.22.0</commons-codec.version>
         <commons-io.version>2.22.0</commons-io.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
-        <easy4j-shiro-biz.version>2.0.x.20260630-SNAPSHOT</easy4j-shiro-biz.version>
+        <shiro-extension.version>2.0.x.20260630-SNAPSHOT</shiro-extension.version>
         <fastjson.version>2.0.62</fastjson.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <junit.version>4.13.2</junit.version>
@@ -105,8 +105,13 @@
             <!-- For Easy4j Shiro -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>shiro-biz</artifactId>
-                <version>${easy4j-shiro-biz.version}</version>
+                <artifactId>shiro-extension-core</artifactId>
+                <version>${shiro-extension.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.easy4j</groupId>
+                <artifactId>shiro-extension-spring</artifactId>
+                <version>${shiro-extension.version}</version>
             </dependency>
             <!-- For Spring Framework -->
             <dependency>
@@ -154,7 +159,11 @@
         <!-- For Easy4j Shiro -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>shiro-biz</artifactId>
+            <artifactId>shiro-extension-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.easy4j</groupId>
+            <artifactId>shiro-extension-spring</artifactId>
         </dependency>
         <!-- For Spring Framework -->
         <dependency>
@@ -461,7 +470,6 @@
                 <!-- ═══ Dependency versions（自然排序）═══ -->
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <lombok.version>1.18.46</lombok.version>
-                <maven.test.skip>true</maven.test.skip>
                 <spring-framework.version>5.3.39</spring-framework.version>
                 <!-- ═══ Maven Plugin versions（自然排序）═══ -->
                 <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
