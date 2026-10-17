@@ -419,7 +419,7 @@
                 <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
                 <!-- ═══ Dependency versions（自然排序）═══ -->
                 <lombok.version>1.18.46</lombok.version>
-                <maven.test.skip>true</maven.test.skip>
+                <maven.test.skip>false</maven.test.skip>
                 <spring-framework.version>5.3.39</spring-framework.version>
                 <!-- ═══ Maven Plugin versions（自然排序）═══ -->
             </properties>
