@@ -26,7 +26,7 @@ Shiro extension with PF4J — pluggable authentication and authorization for Shi
 
 `shiro-pf4j` lets plug-ins extend Shiro's authentication and authorization:
 
-- **Extension points**: `AuthenticatingExtensionPoint`, `AuthorizationExtensionPoint`, `PrincipalRepositoryExtensionPoint` (extends `ShiroPrincipalRepository` from `shiro-biz`) — implemented by plug-ins, discovered through the PF4J `PluginManager`.
+- **Extension points**: `AuthenticatingExtensionPoint`, `AuthorizationExtensionPoint`, `PrincipalRepositoryExtensionPoint` (extends `ShiroPrincipalRepository` from `shiro-extension-core`) — implemented by plug-ins, discovered through the PF4J `PluginManager`.
 - **Realm**: `AuthorizingRealmExtensionPoint` / `DefaultExtensionPointAuthorizingRealm` dispatch authentication and authorization to the extension point matching the request's plug-in / extension identifiers.
 - **Filters**: `AbstractExtensionPointAuthenticatingFilter` / `DefaultExtensionPointAuthenticatingFilter`, logout filters, and `AbstracExtensionPointAuthorizationFilter` / `DefaultExtensionPointAuthorizationFilter` route each request to the right plug-in extension.
 - **Mapping annotations**: `@AuthcMapping` / `@AuthzMapping` (id, title, desc) mark authentication/authorization extension points.
@@ -60,7 +60,7 @@ Shiro extension with PF4J — pluggable authentication and authorization for Shi
 | Token | Available | `ExtensionPointAuthenticationToken` (username/password/captcha/remember-me/host variants). |
 | Exceptions | Available | `AuthcPluginNotFoundException`, `AuthcPointNotFoundException`, `AuthzPluginNotFoundException`, `AuthzPointNotFoundException`. |
 
-> Status is reported as of `2.0.x.x.20260630-SNAPSHOT` on the `feature/2.0.x` branch.
+> Status is reported as of `2.0.x.20260630-SNAPSHOT` on the `feature/2.0.x` branch.
 
 ## 3. Requirements & Compatibility
 
@@ -69,7 +69,7 @@ Shiro extension with PF4J — pluggable authentication and authorization for Shi
 | JDK | 17+ |
 | Maven | 3.0+ (Maven Wrapper 3.5.0 bundled) |
 | PF4J | 3.6.0 (`org.pf4j:pf4j`) |
-| easy4j dependency | `io.github.easy4j:shiro-biz` (`2.0.x.x.20260630-SNAPSHOT`) |
+| easy4j dependencies | `io.github.easy4j:shiro-extension-core` and `shiro-extension-spring` (`2.0.x.20260630-SNAPSHOT`) |
 | Other | spring-core, commons-lang3, javax.servlet-api 4.0.1 |
 
 **Version lines**
@@ -115,7 +115,7 @@ This is a **single-module** project (packaging `jar`), classes under `org.apache
 
 ## 5. Installation
 
-The artifact is not yet published to Maven Central. Resolve it from the project's configured artifact repository (Aliyun Packages) or install it locally from source; the snapshot version currently used on the `feature/2.0.x` branch is `2.0.x.x.20260630-SNAPSHOT`.
+The artifact is not yet published to Maven Central. Resolve it from the project's configured artifact repository (Aliyun Packages) or install it locally from source; the snapshot version currently used on the `feature/2.0.x` branch is `2.0.x.20260630-SNAPSHOT`.
 
 **Maven**
 
@@ -123,14 +123,14 @@ The artifact is not yet published to Maven Central. Resolve it from the project'
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>shiro-pf4j</artifactId>
-    <version>2.0.x.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-implementation 'io.github.easy4j:shiro-pf4j:2.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:shiro-pf4j:2.0.x.20260630-SNAPSHOT'
 ```
 
 ## 6. Quick Start
@@ -198,7 +198,7 @@ This library has no configuration properties or prefix; behavior is configured p
 
 Test & gate facts (as configured in the pom):
 
-- One JUnit 4 test class exists: `org.apache.shiro.pf4j.LoginLogoutTest`, which drives a login/logout flow via `IniSecurityManagerFactory("classpath:shiro.ini")` with `ExtensionPointAuthenticationToken`. Note: the referenced `shiro.ini` fixture is not present in the test resources at this snapshot, so the test currently cannot pass as-is; in addition the pom's surefire configuration defaults to skipping tests.
+- Eleven JUnit 4 test classes run by default (72 tests). `LoginLogoutTest` uses the bundled `src/test/resources/shiro.ini` fixture to verify login and logout with `ExtensionPointAuthenticationToken`.
 - JaCoCo is bound to `prepare-agent` / `report` / `check`; the `check` rule requires a **90% line coverage ratio** (configured with `haltOnFailure=false`, i.e. reported rather than hard-failing).
 
 ## 10. Versioning & Branches

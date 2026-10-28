@@ -26,7 +26,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 
 `shiro-pf4j` 让插件扩展 Shiro 的认证与授权：
 
-- **扩展点**：`AuthenticatingExtensionPoint`、`AuthorizationExtensionPoint`、`PrincipalRepositoryExtensionPoint`（继承 `shiro-biz` 的 `ShiroPrincipalRepository`）——由插件实现，通过 PF4J `PluginManager` 发现。
+- **扩展点**：`AuthenticatingExtensionPoint`、`AuthorizationExtensionPoint`、`PrincipalRepositoryExtensionPoint`（继承 `shiro-extension-core` 的 `ShiroPrincipalRepository`）——由插件实现，通过 PF4J `PluginManager` 发现。
 - **Realm**：`AuthorizingRealmExtensionPoint` / `DefaultExtensionPointAuthorizingRealm` 根据请求中的插件/扩展标识，将认证与授权分派给匹配的扩展点。
 - **过滤器**：`AbstractExtensionPointAuthenticatingFilter` / `DefaultExtensionPointAuthenticatingFilter`、登出过滤器，以及 `AbstracExtensionPointAuthorizationFilter` / `DefaultExtensionPointAuthorizationFilter`，将每个请求路由到正确的插件扩展。
 - **映射注解**：`@AuthcMapping` / `@AuthzMapping`（id、title、desc）标注认证/授权扩展点。
@@ -60,7 +60,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 | Token | 可用 | `ExtensionPointAuthenticationToken`（用户名/密码/验证码/记住我/主机多种变体）。 |
 | 异常 | 可用 | `AuthcPluginNotFoundException`、`AuthcPointNotFoundException`、`AuthzPluginNotFoundException`、`AuthzPointNotFoundException`。 |
 
-> 状态以 `feature/2.0.x` 分支上的 `2.0.x.x.20260630-SNAPSHOT` 为准。
+> 状态以 `feature/2.0.x` 分支上的 `2.0.x.20260630-SNAPSHOT` 为准。
 
 ## 3. Requirements & Compatibility
 
@@ -69,7 +69,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 | JDK | 17+ |
 | Maven | 3.0+（内置 Maven Wrapper 3.5.0） |
 | PF4J | 3.6.0（`org.pf4j:pf4j`） |
-| easy4j 依赖 | `io.github.easy4j:shiro-biz`（`2.0.x.x.20260630-SNAPSHOT`） |
+| easy4j 依赖 | `io.github.easy4j:shiro-extension-core` 与 `shiro-extension-spring`（`2.0.x.20260630-SNAPSHOT`） |
 | 其他 | spring-core、commons-lang3、javax.servlet-api 4.0.1 |
 
 **版本线**
@@ -115,7 +115,7 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 
 ## 5. Installation
 
-该构件尚未发布到 Maven Central。请从项目配置的制品仓库（阿里云制品仓库）获取，或从源码本地安装；`feature/2.0.x` 分支当前使用的快照版本为 `2.0.x.x.20260630-SNAPSHOT`。
+该构件尚未发布到 Maven Central。请从项目配置的制品仓库（阿里云制品仓库）获取，或从源码本地安装；`feature/2.0.x` 分支当前使用的快照版本为 `2.0.x.20260630-SNAPSHOT`。
 
 **Maven**
 
@@ -123,14 +123,14 @@ Shiro 的 PF4J 扩展——基于 [PF4J](https://pf4j.org/)（插件框架）实
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>shiro-pf4j</artifactId>
-    <version>2.0.x.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-implementation 'io.github.easy4j:shiro-pf4j:2.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:shiro-pf4j:2.0.x.20260630-SNAPSHOT'
 ```
 
 ## 6. Quick Start
@@ -198,7 +198,7 @@ filter.setLoginUrl("/login");
 
 测试与门禁事实（以 pom 配置为准）：
 
-- 存在一个 JUnit 4 测试类 `org.apache.shiro.pf4j.LoginLogoutTest`，通过 `IniSecurityManagerFactory("classpath:shiro.ini")` 配合 `ExtensionPointAuthenticationToken` 驱动登录/登出流程。注意：测试引用的 `shiro.ini` 夹具在本快照的测试资源中并不存在，因此该测试当前无法按原样通过；另外 pom 的 surefire 配置默认跳过测试。
+- 默认运行 11 个 JUnit 4 测试类（72 项测试）。`LoginLogoutTest` 使用随源码提供的 `src/test/resources/shiro.ini` 夹具，验证 `ExtensionPointAuthenticationToken` 的登录与登出。
 - JaCoCo 绑定 `prepare-agent` / `report` / `check`；`check` 规则要求**行覆盖率不低于 90%**（配置了 `haltOnFailure=false`，即仅报告而不强制失败）。
 
 ## 10. Versioning & Branches
