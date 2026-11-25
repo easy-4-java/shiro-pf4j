@@ -1,0 +1,21 @@
+{
+  "repo": "shiro-pf4j",
+  "branch": "feature/2.0.x",
+  "java": "17",
+  "shiro": "3.0.2",
+  "declaration_and_import_check": "PASS",
+  "issues": [],
+  "dependency_tree_verified": false,
+  "maven_exit": 1,
+  "maven_command": [
+    "/opt/homebrew/bin/mvn",
+    "-s",
+    "/tmp/shiro-302-settings.xml",
+    "-Dmaven.repo.local=/tmp/shiro-302-m2",
+    "-o",
+    "-B",
+    "-ntp",
+    "test"
+  ],
+  "java_home": "/Users/wandl/Library/Java/JavaVirtualMachines/corretto-17.0.21/Contents/Home"
+}

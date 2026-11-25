@@ -1,0 +1,28 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< io.github.easy4j:shiro-pf4j >---------------------
+[INFO] Building io.github.easy4j:shiro-pf4j 2.0.x.20260630-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] Parameter 'defaultLibBundleDir' is unknown for plugin 'maven-compiler-plugin:3.15.0:compile (default-compile)'
+[WARNING] Parameter 'defaultLibBundleDir' is unknown for plugin 'maven-compiler-plugin:3.15.0:testCompile (default-testCompile)'
+[WARNING] The POM for org.owasp.encoder:encoder:jar:1.6.0 is missing, no dependency information available
+[WARNING] The POM for io.github.easy4j:shiro-extension-spring:jar:2.0.x.20260630-SNAPSHOT is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.259 s
+[INFO] Finished at: 2026-11-17T23:30:05+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project shiro-pf4j: Could not resolve dependencies for project io.github.easy4j:shiro-pf4j:jar:2.0.x.20260630-SNAPSHOT
+[ERROR] dependency: org.owasp.encoder:encoder:jar:1.6.0 (compile)
+[ERROR] 	Cannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.owasp.encoder:encoder:jar:1.6.0 has not been downloaded from it before.
+[ERROR] dependency: io.github.easy4j:shiro-extension-spring:jar:2.0.x.20260630-SNAPSHOT (compile)
+[ERROR] 	Could not find artifact io.github.easy4j:shiro-extension-spring:jar:2.0.x.20260630-SNAPSHOT
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
