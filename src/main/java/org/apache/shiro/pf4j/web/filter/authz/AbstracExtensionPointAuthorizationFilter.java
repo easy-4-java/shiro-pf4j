@@ -17,9 +17,9 @@ package org.apache.shiro.pf4j.web.filter.authz;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.apache.shiro.pf4j.authz.point.AuthorizationExtensionPoint;
 import org.apache.shiro.pf4j.utils.ExtensionPointUtils;

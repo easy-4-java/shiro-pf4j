@@ -1,7 +1,7 @@
 package org.apache.shiro.pf4j.realm;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.pf4j.authc.token.ExtensionPointAuthenticationToken;

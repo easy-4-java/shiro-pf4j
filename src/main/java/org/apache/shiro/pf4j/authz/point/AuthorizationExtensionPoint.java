@@ -17,9 +17,9 @@ package org.apache.shiro.pf4j.authz.point;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.pf4j.ExtensionPoint;
 
@@ -46,7 +46,7 @@ public interface AuthorizationExtensionPoint extends ExtensionPoint {
      * </p>
      * <b>Helpful Hint:</b> if your subclass extends {@link org.apache.shiro.web.filter.PathMatchingFilter PathMatchingFilter},
      * you may wish to instead override the
-     * {@link org.apache.shiro.web.filter.PathMatchingFilter#isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse, String, Object)
+     * {@link org.apache.shiro.web.filter.PathMatchingFilter#isEnabled(jakarta.servlet.ServletRequest, jakarta.servlet.ServletResponse, String, Object)
      * PathMatchingFilter.isEnabled(request,response,path,pathSpecificConfig)}
      * method if you want to make your enable/disable decision based on any path-specific configuration.
      *
@@ -98,7 +98,7 @@ public interface AuthorizationExtensionPoint extends ExtensionPoint {
 
     /**
      * Processes requests where the subject was denied access as determined by the
-     * {@link #isAccessAllowed(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Object) isAccessAllowed}
+     * {@link #isAccessAllowed(jakarta.servlet.ServletRequest, jakarta.servlet.ServletResponse, Object) isAccessAllowed}
      * method, retaining the {@code mappedValue} that was used during configuration.
      * <p>
      * This method immediately delegates to onAccessDenied(ServletRequest,ServletResponse) as a
