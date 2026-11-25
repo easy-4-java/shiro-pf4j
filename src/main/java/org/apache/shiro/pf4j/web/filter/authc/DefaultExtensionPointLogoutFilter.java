@@ -15,8 +15,8 @@
  */
 package org.apache.shiro.pf4j.web.filter.authc;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.apache.shiro.pf4j.utils.ExtensionPointUtils;
 

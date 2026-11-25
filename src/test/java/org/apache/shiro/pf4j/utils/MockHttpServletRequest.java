@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Minimal mock HttpServletRequest for unit testing.
@@ -74,20 +74,25 @@ class MockHttpServletRequest implements HttpServletRequest {
     @Override public String getServletPath() { return ""; }
     @Override public HttpSession getSession(boolean create) { return null; }
     @Override public HttpSession getSession() { return null; }
+    @Override public String changeSessionId() { return null; }
     @Override public boolean isRequestedSessionIdValid() { return false; }
     @Override public boolean isRequestedSessionIdFromCookie() { return false; }
     @Override public boolean isRequestedSessionIdFromURL() { return false; }
-    @Override public boolean isRequestedSessionIdFromUrl() { return false; }
     @Override public boolean authenticate(HttpServletResponse response) { return false; }
     @Override public void login(String username, String password) {}
     @Override public void logout() {}
-    @Override public java.util.Collection<javax.servlet.http.Part> getParts() { return null; }
-    @Override public javax.servlet.http.Part getPart(String name) { return null; }
+    @Override public java.util.Collection<jakarta.servlet.http.Part> getParts() { return null; }
+    @Override public jakarta.servlet.http.Part getPart(String name) { return null; }
+    @Override
+    public <T extends jakarta.servlet.http.HttpUpgradeHandler> T upgrade(Class<T> handlerClass) {
+        throw new UnsupportedOperationException("HTTP upgrade is outside this test request's contract");
+    }
     @Override public Object getAttribute(String name) { return null; }
     @Override public Enumeration<String> getAttributeNames() { return Collections.emptyEnumeration(); }
     @Override public String getCharacterEncoding() { return "UTF-8"; }
     @Override public void setCharacterEncoding(String env) {}
     @Override public int getContentLength() { return -1; }
+    @Override public long getContentLengthLong() { return -1; }
     @Override public String getContentType() { return null; }
     @Override public ServletInputStream getInputStream() { return null; }
     @Override public String[] getParameterValues(String name) { return null; }
@@ -106,16 +111,18 @@ class MockHttpServletRequest implements HttpServletRequest {
     @Override public Enumeration<Locale> getLocales() { return Collections.emptyEnumeration(); }
     @Override public boolean isSecure() { return false; }
     @Override public RequestDispatcher getRequestDispatcher(String path) { return null; }
-    @Override public String getRealPath(String path) { return null; }
     @Override public int getRemotePort() { return 0; }
     @Override public String getLocalName() { return "localhost"; }
     @Override public String getLocalAddr() { return "127.0.0.1"; }
     @Override public int getLocalPort() { return 80; }
-    @Override public javax.servlet.ServletContext getServletContext() { return null; }
-    @Override public javax.servlet.AsyncContext startAsync() { return null; }
-    @Override public javax.servlet.AsyncContext startAsync(javax.servlet.ServletRequest req, javax.servlet.ServletResponse res) { return null; }
+    @Override public jakarta.servlet.ServletContext getServletContext() { return null; }
+    @Override public jakarta.servlet.AsyncContext startAsync() { return null; }
+    @Override public jakarta.servlet.AsyncContext startAsync(jakarta.servlet.ServletRequest req, jakarta.servlet.ServletResponse res) { return null; }
     @Override public boolean isAsyncStarted() { return false; }
     @Override public boolean isAsyncSupported() { return false; }
-    @Override public javax.servlet.AsyncContext getAsyncContext() { return null; }
-    @Override public javax.servlet.DispatcherType getDispatcherType() { return null; }
+    @Override public jakarta.servlet.AsyncContext getAsyncContext() { return null; }
+    @Override public jakarta.servlet.DispatcherType getDispatcherType() { return null; }
+    @Override public String getRequestId() { return "test-request"; }
+    @Override public String getProtocolRequestId() { return "test-request"; }
+    @Override public jakarta.servlet.ServletConnection getServletConnection() { return null; }
 }

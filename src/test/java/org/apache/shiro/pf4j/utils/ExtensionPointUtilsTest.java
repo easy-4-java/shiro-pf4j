@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.Collections;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -30,13 +30,11 @@ public class ExtensionPointUtilsTest {
     @Before
     public void setUp() {
         mockRequest = new MockHttpServletRequest();
-        mockResponse = new javax.servlet.http.HttpServletResponse() {
+        mockResponse = new jakarta.servlet.http.HttpServletResponse() {
             @Override public void addCookie(Cookie cookie) {}
             @Override public boolean containsHeader(String name) { return false; }
             @Override public String encodeURL(String url) { return url; }
             @Override public String encodeRedirectURL(String url) { return url; }
-            @Override public String encodeUrl(String url) { return url; }
-            @Override public String encodeRedirectUrl(String url) { return url; }
             @Override public void sendError(int sc, String msg) {}
             @Override public void sendError(int sc) {}
             @Override public void sendRedirect(String location) {}
@@ -47,17 +45,17 @@ public class ExtensionPointUtilsTest {
             @Override public void setIntHeader(String name, int value) {}
             @Override public void addIntHeader(String name, int value) {}
             @Override public void setStatus(int sc) {}
-            @Override public void setStatus(int sc, String sm) {}
             @Override public int getStatus() { return 200; }
             @Override public String getHeader(String name) { return null; }
             @Override public java.util.Collection<String> getHeaders(String name) { return Collections.emptyList(); }
             @Override public java.util.Collection<String> getHeaderNames() { return Collections.emptyList(); }
             @Override public String getCharacterEncoding() { return "UTF-8"; }
             @Override public String getContentType() { return null; }
-            @Override public javax.servlet.ServletOutputStream getOutputStream() { return null; }
+            @Override public jakarta.servlet.ServletOutputStream getOutputStream() { return null; }
             @Override public java.io.PrintWriter getWriter() { return null; }
             @Override public void setCharacterEncoding(String charset) {}
             @Override public void setContentLength(int len) {}
+            @Override public void setContentLengthLong(long len) {}
             @Override public void setContentType(String type) {}
             @Override public void setBufferSize(int size) {}
             @Override public int getBufferSize() { return 0; }

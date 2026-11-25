@@ -50,9 +50,9 @@
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.46</lombok.version>
         <pf4j.version>3.6.0</pf4j.version>
-        <servlet-api.version>3.0.1</servlet-api.version>
+        <servlet-api.version>6.0.0</servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
-        <spring-framework.version>5.3.39</spring-framework.version>
+        <spring-framework.version>6.2.19</spring-framework.version>
         <!-- Maven Plugin versions -->
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -68,10 +68,43 @@
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <shiro.version>3.0.2</shiro.version>
+        <jackson-bom.version>2.22.3</jackson-bom.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- 固定从扩展组件传递引入的 Shiro 和 Jackson 版本线。 -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 统一 Spring 传递依赖，避免 Shiro 引入其他版本线。 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- For Junit -->
             <dependency>
                 <groupId>junit</groupId>
@@ -80,8 +113,8 @@
             </dependency>
             <!-- For Servlet Api -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
             </dependency>
             <!-- For Slf4j -->
@@ -142,8 +175,8 @@
         </dependency>
         <!-- For Servlet Api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- For Commons Lang3 -->
@@ -470,7 +503,7 @@
                 <!-- ═══ Dependency versions（自然排序）═══ -->
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <lombok.version>1.18.46</lombok.version>
-                <spring-framework.version>5.3.39</spring-framework.version>
+                <spring-framework.version>6.2.19</spring-framework.version>
                 <!-- ═══ Maven Plugin versions（自然排序）═══ -->
                 <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
                 <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
